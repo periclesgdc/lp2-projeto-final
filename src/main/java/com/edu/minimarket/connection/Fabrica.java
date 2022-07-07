@@ -3,7 +3,9 @@ package com.edu.minimarket.connection;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 public class Fabrica {
     SessionFactory sessionFactory;
@@ -11,7 +13,12 @@ public class Fabrica {
     Transaction tx;
 
     public Fabrica() {
-        this.sessionFactory = new Configuration().configure().buildSessionFactory();
+        Configuration configuration = new Configuration();
+        configuration.configure();
+        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+            .applySettings(configuration.getProperties()).build();
+        
+        this.sessionFactory = configuration.buildSessionFactory(serviceRegistry);
     }
 
     public void abrirConexao() {
