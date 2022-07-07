@@ -7,7 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import com.edu.minimarket.enums.Categoria;
+import com.edu.minimarket.enums.CategoriaEnum;
 
 @Entity
 public class Produto {
@@ -27,12 +27,12 @@ public class Produto {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Categoria categoria;
+    private CategoriaEnum categoria;
 
     @Column(nullable = false)
     private Boolean status = true;
     
-    public Produto(String nome, Double precoCusto, Double precoVenda, Categoria categoria) {
+    public Produto(String nome, Double precoCusto, Double precoVenda, CategoriaEnum categoria) {
         this.nome = nome;
         this.precoCusto = precoCusto;
         this.precoVenda = precoVenda;
@@ -63,11 +63,11 @@ public class Produto {
         this.precoVenda = precoVenda;
     }
 
-    public Categoria getCategoria() {
+    public CategoriaEnum getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(CategoriaEnum categoria) {
         this.categoria = categoria;
     }
 

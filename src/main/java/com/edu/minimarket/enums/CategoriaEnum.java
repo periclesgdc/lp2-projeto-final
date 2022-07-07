@@ -1,6 +1,6 @@
 package com.edu.minimarket.enums;
 
-public enum Categoria {
+public enum CategoriaEnum {
     HORTIFRUTI,
     LATICINIOS,
     CEREAIS,
