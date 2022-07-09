@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import com.edu.minimarket.enums.CategoriaEnum;
 
 @Entity
-public class Produto {
+public class Produto extends ClasseBase {
 
     @Id
     @GeneratedValue
@@ -31,6 +31,8 @@ public class Produto {
 
     @Column(nullable = false)
     private Boolean status = true;
+
+    public Produto() {}
     
     public Produto(String nome, Double precoCusto, Double precoVenda, CategoriaEnum categoria) {
         this.nome = nome;
@@ -79,8 +81,9 @@ public class Produto {
         this.status = status;
     }
 
-    public String detalhes() {
-        return String.format(
+    @Override
+    public void detalhes() {
+        System.out.println(String.format(
             "Produto{id = %s, nome = %s, custo = %s, venda = %s, categoria = %s, status = %s}",
             this.id,
             this.nome,
@@ -88,6 +91,6 @@ public class Produto {
             this.precoVenda,
             this.categoria.name(),
             this.status
-        );
+        ));
     }
 }
