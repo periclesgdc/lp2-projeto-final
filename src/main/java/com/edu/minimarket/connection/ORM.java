@@ -7,8 +7,6 @@ import java.util.Map;
 
 import com.edu.minimarket.domain.ClasseBase;
 
-import javassist.expr.Instanceof;
-
 
 public class ORM <T extends ClasseBase> {
 
@@ -18,21 +16,24 @@ public class ORM <T extends ClasseBase> {
         this.classeExtendida = classeExtendida;
     }
 
-    public void salvar(T base) {
-        Fabrica.salvar(base);
+    public void salvar(T entidade) {
+        Fabrica.salvar(entidade);
     }
 
-    public void salvar(T base, Boolean fecharTransacao) {
-        Fabrica.salvar(base, fecharTransacao);
+    public void salvar(T entidade, Boolean fecharTransacao) {
+        Fabrica.salvar(entidade, fecharTransacao);
     }
 
-    public void salvar(Collection<ClasseBase> entityList) {
-        Fabrica.abrirTransacao();
-        entityList.forEach(Fabrica::salvar);
+    public void salvar(Collection<T> listaEntidades) {
+        listaEntidades.forEach(Fabrica::salvar);
         Fabrica.fecharTransacao();
     }
 
     public T buscarPorId(Long id) {
         return Fabrica.buscar(this.classeExtendida, id);
+    }
+
+    public List<T> buscarTodos() {
+        return Fabrica.buscar(this.classeExtendida, List.of());
     }
 }

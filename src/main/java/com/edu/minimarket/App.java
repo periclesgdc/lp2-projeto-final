@@ -6,8 +6,7 @@ import com.edu.minimarket.domain.Produto;
 import com.edu.minimarket.enums.CategoriaEnum;
 
 public class App {
-    public static void main(String[] args) {/* 
-        WindowController.openWindow(PagesEnum.LOGIN); */
+    public static void main(String[] args) {
 
         Produto feijao = new Produto("Feijão", 10.0, 15.3, CategoriaEnum.CEREAIS);
         Produto arroz = new Produto("Arroz", 500.0, 750.0, CategoriaEnum.CEREAIS);
@@ -26,6 +25,10 @@ public class App {
 
         Produto produto = orm.buscarPorId(1L);
         produto.detalhes();
+
+        System.out.println("-----");
+
+        orm.buscarTodos().forEach(Produto::detalhes);
 
         Fabrica.fecharConexao();
     }
