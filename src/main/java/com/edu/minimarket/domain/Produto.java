@@ -82,8 +82,8 @@ public class Produto extends ClasseBase {
     }
 
     @Override
-    public void detalhes() {
-        System.out.println(String.format(
+    public String detalhes() {
+        return String.format(
             "Produto{id = %s, nome = %s, custo = %s, venda = %s, categoria = %s, status = %s}",
             this.id,
             this.nome,
@@ -91,6 +91,6 @@ public class Produto extends ClasseBase {
             this.precoVenda,
             this.categoria.name(),
             this.status
-        ));
+        );
     }
 }

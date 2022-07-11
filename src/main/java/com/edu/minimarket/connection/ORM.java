@@ -1,9 +1,7 @@
 package com.edu.minimarket.connection;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.edu.minimarket.domain.ClasseBase;
 
