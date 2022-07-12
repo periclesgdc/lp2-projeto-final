@@ -20,4 +20,12 @@ public class Caixa extends Funcao {
     public void executarAcao(PermissoesEnum permissao) {
         
     }
+
+    public void abrirPDV() {
+
+    }
+
+    public String consultarEstoque() {
+        return null;
+    }
 }

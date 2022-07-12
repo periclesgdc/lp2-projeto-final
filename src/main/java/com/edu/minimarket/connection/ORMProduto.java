@@ -1,4 +1,11 @@
 package com.edu.minimarket.connection;
 
-public class ORMProduto {
+import com.edu.minimarket.domain.Produto;
+
+public class ORMProduto extends ORM<Produto> {
+
+    public ORMProduto() {
+        super(Produto.class);
+    }
+
 }
