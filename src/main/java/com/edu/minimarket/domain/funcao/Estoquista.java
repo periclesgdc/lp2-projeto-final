@@ -1,15 +1,17 @@
 package com.edu.minimarket.domain.funcao;
 
+import com.edu.minimarket.enums.CategoriaEnum;
+
+import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class Estoquista extends Funcao{
 
     public Estoquista() {
         super(List.of(
-                PermissoesEnum.CONSULTAR_ESTOQUE,
-                PermissoesEnum.INSERIR_ESTOQUE,
-                PermissoesEnum.REMOVER_ESTOQUE
+                PermissoesEnum.CONSULTAR_PRODUTOS,
+                PermissoesEnum.INSERIR_PRODUTO,
+                PermissoesEnum.REMOVER_PRODUTO
         ));
     }
     @Override
@@ -20,13 +22,13 @@ public class Estoquista extends Funcao{
     @Override
     public void executarAcao(PermissoesEnum permissao) throws IllegalArgumentException {
         switch (permissao){
-            case INSERIR_ESTOQUE:
+            case INSERIR_PRODUTO:
                 this.inserirEstoque();
                 break;
-            case REMOVER_ESTOQUE:
+            case REMOVER_PRODUTO:
                 this.removerEstoque();
                 break;
-            case CONSULTAR_ESTOQUE:
+            case CONSULTAR_PRODUTOS:
                 this.consultarEstoque();
                 break;
             default:
@@ -40,9 +42,21 @@ public class Estoquista extends Funcao{
     }
 
     public String inserirEstoque(){
-        Scanner ler = new Scanner(System.in);
-        String nomeProduto;
         System.out.print("Nome do produto: ");
+        String nomeProduto =  entrada.next();
+
+        System.out.print("Preço de custo: ");
+        Double precoCusto = entrada.nextDouble();
+
+        System.out.print("Preço de venda: ");
+        Double precoVenda = entrada.nextDouble();
+
+        System.out.println("Escolho uma das categorias abaxo: ");
+        System.out.println(Arrays.asList(CategoriaEnum.values()));
+        CategoriaEnum catgoria = CategoriaEnum.valueOf(entrada.next());
+
+        System.out.print("Quantidade inicial de produtos: ");
+        Integer quantidade = entrada.nextInt();
 
         return "";
 
