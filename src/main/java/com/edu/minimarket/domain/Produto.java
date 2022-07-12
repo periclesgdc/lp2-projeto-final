@@ -1,13 +1,8 @@
 package com.edu.minimarket.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 import com.edu.minimarket.enums.CategoriaEnum;
+
+import javax.persistence.*;
 
 @Entity
 public class Produto extends ClasseBase {
@@ -32,13 +27,17 @@ public class Produto extends ClasseBase {
     @Column(nullable = false)
     private Boolean status = true;
 
+    @Column(nullable = false)
+    private Integer quantidade;
+
     public Produto() {}
-    
-    public Produto(String nome, Double precoCusto, Double precoVenda, CategoriaEnum categoria) {
+
+    public Produto(String nome, Double precoCusto, Double precoVenda, CategoriaEnum categoria, Integer quantidade) {
         this.nome = nome;
         this.precoCusto = precoCusto;
         this.precoVenda = precoVenda;
         this.categoria = categoria;
+        this.quantidade = quantidade;
     }
 
     public String getNome() {
@@ -79,6 +78,14 @@ public class Produto extends ClasseBase {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
     }
 
     @Override
