@@ -2,6 +2,7 @@ package com.edu.minimarket.connection;
 
 import com.edu.minimarket.domain.ClasseBase;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -14,12 +15,13 @@ public class ORM <T extends ClasseBase> {
         this.classeExtendida = classeExtendida;
     }
 
-    public void salvar(T entidade) {
-        Fabrica.salvar(entidade);
-    }
-
     public void salvar(Collection<T> listaEntidades) {
         listaEntidades.forEach(Fabrica::salvar);
+        Fabrica.fecharTransacao();
+    }
+
+    public void salvar(T... listaEntidades) {
+        Arrays.asList(listaEntidades).forEach(Fabrica::salvar);
         Fabrica.fecharTransacao();
     }
 

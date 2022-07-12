@@ -30,10 +30,7 @@ public class App {
 
         ORM<Produto> ormProd = new ORM<>(Produto.class);
 
-        ormProd.salvar(feijao);
-        ormProd.salvar(arroz);
-        ormProd.salvar(papelHigienico);
-        ormProd.salvar(sabao);
+        ormProd.salvar(feijao, arroz, papelHigienico, sabao);
         
         ORM<Estoque> ormEst = new ORM<>(Estoque.class);
 
@@ -41,8 +38,7 @@ public class App {
 
         ORMUsuario ormUsu = new ORMUsuario(Usuario.class);
 
-        ormUsu.salvar(admin);
-        ormUsu.salvar(pericles, true);
+        ormUsu.salvar(admin, pericles);
 
         Produto produto = ormProd.buscarPorId(1L);
         produto.detalhes();
