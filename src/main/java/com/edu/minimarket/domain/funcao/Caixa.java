@@ -20,8 +20,4 @@ public class Caixa extends Funcao {
     public void executarAcao() {
         
     }
-
-    public Boolean adicionarUsuario(String senha){
-        return true;
-    }
 }
