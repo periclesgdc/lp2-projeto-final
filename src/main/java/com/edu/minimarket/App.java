@@ -6,9 +6,10 @@ import com.edu.minimarket.connection.Fabrica;
 import com.edu.minimarket.connection.ORM;
 import com.edu.minimarket.connection.ORMUsuario;
 import com.edu.minimarket.domain.Estoque;
-import com.edu.minimarket.domain.Funcao;
 import com.edu.minimarket.domain.Produto;
 import com.edu.minimarket.domain.Usuario;
+import com.edu.minimarket.domain.funcao.Caixa;
+import com.edu.minimarket.domain.funcao.Gerente;
 import com.edu.minimarket.enums.CategoriaEnum;
 
 public class App {
@@ -21,15 +22,8 @@ public class App {
 
         Estoque estoqueFeijao = new Estoque(feijao, 500);
 
-        Usuario pericles = new Usuario("periclesgdc", "admin", new Funcao() {
-
-            @Override
-            public String exibirPermissoes() {
-                // TODO Auto-generated method stub
-                return null;
-            }
-            
-        });
+        Usuario admin = new Usuario("admin", "admin", new Gerente());
+        Usuario pericles = new Usuario("periclesgdc", "testeSenha", new Caixa());
         
         Fabrica.prepararConexao();
         Fabrica.abrirConexao();
@@ -45,8 +39,9 @@ public class App {
 
         ormEst.salvar(estoqueFeijao);
 
-        ORM<Usuario> ormUsu = new ORM<>(Usuario.class);
+        ORMUsuario ormUsu = new ORMUsuario(Usuario.class);
 
+        ormUsu.salvar(admin);
         ormUsu.salvar(pericles, true);
 
         Produto produto = ormProd.buscarPorId(1L);
@@ -57,12 +52,17 @@ public class App {
         ormProd.buscarTodos().forEach(elem -> System.out.println(elem.detalhes()));
         ormEst.buscarTodos().forEach(elem -> System.out.println(elem.detalhes()));
 
-        ORMUsuario ormUsuario = new ORMUsuario(Usuario.class);
+        Usuario retornoUsuarioAdmin = ormUsu.buscarPorNome("admin");
+        
+        System.out.println(retornoUsuarioAdmin.detalhes());
+        System.out.println(retornoUsuarioAdmin.autenticar("admin"));
+        System.out.println(retornoUsuarioAdmin.autenticar("testeErrado"));
 
-        Usuario retornoUsuario = ormUsuario.buscarPorNome("periclesgdc");
-        System.out.println(retornoUsuario.detalhes());
-        System.out.println(retornoUsuario.autenticar("admin"));
-        System.out.println(retornoUsuario.autenticar("testeErrado"));
+        Usuario retornoUsuarioPericles = ormUsu.buscarPorNome("periclesgdc");
+
+        System.out.println(retornoUsuarioPericles.detalhes());
+        System.out.println(retornoUsuarioPericles.autenticar("testeSenha"));
+        System.out.println(retornoUsuarioPericles.autenticar("testeErrado"));
 
         Fabrica.fecharConexao();
     }

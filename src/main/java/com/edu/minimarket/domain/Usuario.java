@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import com.edu.minimarket.domain.funcao.Funcao;
+
 @Entity
 public class Usuario extends ClasseBase {
     
