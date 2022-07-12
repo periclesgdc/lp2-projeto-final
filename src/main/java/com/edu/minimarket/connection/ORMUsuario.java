@@ -6,8 +6,8 @@ import com.edu.minimarket.domain.Usuario;
 
 public class ORMUsuario extends ORM<Usuario> {
 
-    public ORMUsuario(Class<Usuario> classeExtendida) {
-        super(classeExtendida);
+    public ORMUsuario() {
+        super(Usuario.class);
     }
     
     public Usuario buscarPorNome(String nome) {

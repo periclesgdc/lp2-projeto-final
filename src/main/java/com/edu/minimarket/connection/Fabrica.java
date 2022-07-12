@@ -61,7 +61,9 @@ public class Fabrica {
     }
 
     public static void abrirTransacao() {
-        tx = session.beginTransaction();
+        if (Objects.isNull(tx) || Boolean.FALSE.equals(tx.isParticipating())) {
+            tx = session.beginTransaction();
+        }
     }
 
     public static void fecharTransacao() {
@@ -70,29 +72,12 @@ public class Fabrica {
         }
     }
 
-    private static void _salvar(ClasseBase object) {
+    public static void salvar(ClasseBase object) {
         try {
+            abrirTransacao();
             session.persist(object);
         } catch (Exception e) {
-            if (Boolean.TRUE.equals(tx.isParticipating())) {
-                tx.rollback();
-            }
-        }
-    }
-
-    public static void salvar(ClasseBase object) {
-        if (Objects.isNull(tx) || Boolean.FALSE.equals(tx.isParticipating())) {
-            abrirTransacao();
-        }
-
-        _salvar(object);
-    }
-
-    public static void salvar(ClasseBase object, Boolean fecharTransacao) {
-        _salvar(object);
-
-        if (Boolean.TRUE.equals(fecharTransacao)) {
-            fecharTransacao();
+            tx.rollback();
         }
     }
 
