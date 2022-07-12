@@ -40,11 +40,25 @@ public class App {
 
         ormProd.buscarTodos().forEach(elem -> System.out.println(elem.detalhes()));
 
+        System.out.println("-----");
+
+        ormProd.buscarPorCategoria(CategoriaEnum.LIMPEZA).forEach(elem -> System.out.println(elem.detalhes()));
+        ormProd.buscarPorCategoria(CategoriaEnum.CEREAIS).forEach(elem -> System.out.println(elem.detalhes()));
+        ormProd.buscarPorCategoria(CategoriaEnum.BEBIDAS).forEach(elem -> System.out.println(elem.detalhes()));
+
+        System.out.println("-----");
+
+        ormProd.buscarPorNome("papel").forEach(elem -> System.out.println(elem.detalhes()));
+
+        System.out.println("-----");
+
         Usuario retornoUsuarioAdmin = ormUsu.buscarPorNome("admin");
         
         System.out.println(retornoUsuarioAdmin.detalhes());
         System.out.println(retornoUsuarioAdmin.autenticar("admin"));
         System.out.println(retornoUsuarioAdmin.autenticar("testeErrado"));
+
+        System.out.println("-----");
 
         Usuario retornoUsuarioPericles = ormUsu.buscarPorNome("periclesgdc");
 
