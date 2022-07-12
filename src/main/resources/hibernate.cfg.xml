@@ -13,7 +13,6 @@
 
 		<!-- Classes -->
 		<mapping class="com.edu.minimarket.domain.Produto" />
-		<mapping class="com.edu.minimarket.domain.Estoque" />
 		<mapping class="com.edu.minimarket.domain.Usuario" />
 
 	</session-factory>

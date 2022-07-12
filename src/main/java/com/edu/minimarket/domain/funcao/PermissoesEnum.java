@@ -7,7 +7,11 @@ public enum PermissoesEnum {
     ABRIR_PDV("Abrir PDV"),
     CONSULTAR_ESTOQUE("Consultar estoque"),
     INSERIR_ESTOQUE("Inserir no estoque"),
+    INSERIR_PRODUTO("Inserir Produto"),
+    LISTAR_PRODUTO("Listar Produtos"),
     REMOVER_ESTOQUE("Remover do estoque");
+
+
 
     private String descricao;
 

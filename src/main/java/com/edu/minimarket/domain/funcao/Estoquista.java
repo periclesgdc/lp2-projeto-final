@@ -1,6 +1,7 @@
 package com.edu.minimarket.domain.funcao;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Estoquista extends Funcao{
 
@@ -39,7 +40,12 @@ public class Estoquista extends Funcao{
     }
 
     public String inserirEstoque(){
-        return null;
+        Scanner ler = new Scanner(System.in);
+        String nomeProduto;
+        System.out.print("Nome do produto: ");
+
+        return "";
+
     }
 
     public String removerEstoque(){
