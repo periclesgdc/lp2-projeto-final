@@ -3,12 +3,13 @@ package com.edu.minimarket.connection;
 import java.util.Collection;
 import java.util.List;
 
+
 import com.edu.minimarket.domain.ClasseBase;
 
 
 public class ORM <T extends ClasseBase> {
 
-    private Class<T> classeExtendida;
+    protected Class<T> classeExtendida;
     
     public ORM(Class<T> classeExtendida) {
         this.classeExtendida = classeExtendida;
@@ -32,6 +33,6 @@ public class ORM <T extends ClasseBase> {
     }
 
     public List<T> buscarTodos() {
-        return Fabrica.buscar(this.classeExtendida, List.of());
+        return Fabrica.buscar(this.classeExtendida);
     }
 }

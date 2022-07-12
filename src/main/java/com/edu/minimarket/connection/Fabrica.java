@@ -1,5 +1,6 @@
 package com.edu.minimarket.connection;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -99,10 +100,17 @@ public class Fabrica {
         return (T) session.get(entidade, id);
     }
 
-    public static <T extends ClasseBase> List<T> buscar(Class<T> entidade, List<Criterion> criterios) {
+    public static <T extends ClasseBase> List<T> buscar(Class<T> entidade) {
         Criteria c = session.createCriteria(entidade);
+        
+        return c.list();
+    }
+
+    public static <T extends ClasseBase> List<T> buscar(Class<T> entidade, Criterion... criterios) {
+        Criteria c = session.createCriteria(entidade);
+        
         if (Objects.nonNull(criterios)) {
-            criterios.forEach(c::add);
+            Arrays.asList(criterios).forEach(c::add);
         }
         
         return c.list();
