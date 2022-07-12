@@ -1,10 +1,9 @@
 package com.edu.minimarket.connection;
 
+import com.edu.minimarket.domain.ClasseBase;
+
 import java.util.Collection;
 import java.util.List;
-
-
-import com.edu.minimarket.domain.ClasseBase;
 
 
 public class ORM <T extends ClasseBase> {
@@ -17,10 +16,6 @@ public class ORM <T extends ClasseBase> {
 
     public void salvar(T entidade) {
         Fabrica.salvar(entidade);
-    }
-
-    public void salvar(T entidade, Boolean fecharTransacao) {
-        Fabrica.salvar(entidade, fecharTransacao);
     }
 
     public void salvar(Collection<T> listaEntidades) {

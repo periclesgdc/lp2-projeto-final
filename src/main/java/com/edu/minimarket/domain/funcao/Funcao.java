@@ -1,8 +1,7 @@
 package com.edu.minimarket.domain.funcao;
 
-import java.util.Collection;
-
 import javax.persistence.Embeddable;
+import java.util.Collection;
 
 @Embeddable
 public abstract class Funcao {
@@ -14,7 +13,7 @@ public abstract class Funcao {
     }
 
     public abstract String exibirPermissoes();
-    public abstract void executarAcao();
+    public abstract void executarAcao(PermissoesEnum permissao) throws Exception;
 
     public Collection<PermissoesEnum> getPermissoes() {
         return permissoes;

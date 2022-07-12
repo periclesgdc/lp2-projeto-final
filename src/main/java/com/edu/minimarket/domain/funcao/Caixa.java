@@ -17,11 +17,7 @@ public class Caixa extends Funcao {
     }
 
     @Override
-    public void executarAcao() {
+    public void executarAcao(PermissoesEnum permissao) {
         
-    }
-
-    public Boolean adicionarUsuario(String senha){
-        return true;
     }
 }
