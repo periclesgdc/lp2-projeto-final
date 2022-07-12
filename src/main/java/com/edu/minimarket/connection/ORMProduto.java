@@ -16,7 +16,14 @@ public class ORMProduto extends ORM<Produto> {
     public Collection<Produto> buscarPorCategoria(CategoriaEnum categoria) {
         return Fabrica.buscar(
             this.classeExtendida,
-            Restrictions.eq("categoria", categoria
-        ));
+            Restrictions.eq("categoria", categoria)
+        );
+    }
+
+    public Collection<Produto> buscarPorNome(String nome) {
+        return Fabrica.buscar(
+            this.classeExtendida,
+            Restrictions.like("nome", "%" + nome + "%")
+        );
     }
 }
