@@ -23,6 +23,7 @@ public abstract class Funcao {
     public abstract String exibirPermissoes();
     public abstract void executarAcao(PermissoesEnum permissao) throws Exception;
 
+    @ElementCollection
     public Collection<PermissoesEnum> getPermissoes() {
         return permissoes;
     }

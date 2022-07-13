@@ -1,5 +1,9 @@
 package com.edu.minimarket.domain.funcao;
 
+import com.edu.minimarket.connection.Fabrica;
+import com.edu.minimarket.connection.ORM;
+import com.edu.minimarket.connection.ORMProduto;
+import com.edu.minimarket.domain.Produto;
 import com.edu.minimarket.enums.CategoriaEnum;
 
 import java.util.Arrays;
@@ -43,23 +47,30 @@ public class Estoquista extends Funcao{
 
     public String inserirEstoque(){
         System.out.print("Nome do produto: ");
-        String nomeProduto =  entrada.next();
+        String nome =  entrada.next();
 
         System.out.print("Preço de custo: ");
-        Double precoCusto = entrada.nextDouble();
+        double precoCusto = entrada.nextDouble();
 
         System.out.print("Preço de venda: ");
-        Double precoVenda = entrada.nextDouble();
+        double precoVenda = entrada.nextDouble();;
 
         System.out.println("Escolho uma das categorias abaxo: ");
         System.out.println(Arrays.asList(CategoriaEnum.values()));
-        CategoriaEnum catgoria = CategoriaEnum.valueOf(entrada.next());
+        CategoriaEnum categoria = CategoriaEnum.valueOf(entrada.next());
 
         System.out.print("Quantidade inicial de produtos: ");
         Integer quantidade = entrada.nextInt();
+        entrada.close();
 
-        return "";
+        Produto produto = new Produto(nome, precoCusto, precoVenda, categoria, quantidade);
 
+        Fabrica.prepararConexao();
+        Fabrica.abrirConexao();
+        ORM orm = new ORMProduto();
+        orm.salvar(produto);
+
+        return "inserir";
     }
 
     public String removerEstoque(){

@@ -1,18 +1,17 @@
 package com.edu.minimarket;
 
-import java.security.NoSuchAlgorithmException;
-
 import com.edu.minimarket.connection.Fabrica;
 import com.edu.minimarket.connection.ORMProduto;
 import com.edu.minimarket.connection.ORMUsuario;
 import com.edu.minimarket.domain.Produto;
 import com.edu.minimarket.domain.Usuario;
-import com.edu.minimarket.domain.funcao.Caixa;
-import com.edu.minimarket.domain.funcao.Gerente;
+import com.edu.minimarket.domain.funcao.*;
 import com.edu.minimarket.enums.CategoriaEnum;
 
 public class App {
-    public static void main(String[] args) throws NoSuchAlgorithmException {
+    public static void main(String[] args) throws Exception {
+        Funcao estoquista = new Estoquista();
+        estoquista.executarAcao(PermissoesEnum.INSERIR_PRODUTO);
 
         Produto feijao = new Produto("Feijão", 10.0, 15.3, CategoriaEnum.CEREAIS, 10);
         Produto arroz = new Produto("Arroz", 500.0, 750.0, CategoriaEnum.CEREAIS, 1);
