@@ -3,17 +3,16 @@ package com.edu.minimarket.domain.funcao;
 import com.edu.minimarket.connection.Fabrica;
 import com.edu.minimarket.connection.ORM;
 import com.edu.minimarket.connection.ORMProduto;
-import com.edu.minimarket.domain.Produto;
-import com.edu.minimarket.enums.CategoriaEnum;
+import com.edu.minimarket.domain.ClasseBase;
+import com.edu.minimarket.domain.operations.ProdutoCli;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class Estoquista extends Funcao{
 
     public Estoquista() {
         super(List.of(
-                PermissoesEnum.CONSULTAR_PRODUTOS,
+                PermissoesEnum.CONSULTAR_PRODUTO,
                 PermissoesEnum.INSERIR_PRODUTO,
                 PermissoesEnum.REMOVER_PRODUTO
         ));
@@ -32,7 +31,7 @@ public class Estoquista extends Funcao{
             case REMOVER_PRODUTO:
                 this.removerEstoque();
                 break;
-            case CONSULTAR_PRODUTOS:
+            case CONSULTAR_PRODUTO:
                 this.consultarEstoque();
                 break;
             default:
@@ -42,33 +41,22 @@ public class Estoquista extends Funcao{
     }
 
     public String consultarEstoque(){
+        Fabrica.prepararConexao();
+        Fabrica.abrirConexao();
+        ORM orm = new ORMProduto();
+        ClasseBase produto =  orm.buscarPorId(ProdutoCli.consultaProduto());
+
+        System.out.println(produto.toString());
         return null;
     }
 
     public String inserirEstoque(){
-        System.out.print("Nome do produto: ");
-        String nome =  entrada.next();
-
-        System.out.print("Preço de custo: ");
-        double precoCusto = entrada.nextDouble();
-
-        System.out.print("Preço de venda: ");
-        double precoVenda = entrada.nextDouble();;
-
-        System.out.println("Escolho uma das categorias abaxo: ");
-        System.out.println(Arrays.asList(CategoriaEnum.values()));
-        CategoriaEnum categoria = CategoriaEnum.valueOf(entrada.next());
-
-        System.out.print("Quantidade inicial de produtos: ");
-        Integer quantidade = entrada.nextInt();
-        entrada.close();
-
-        Produto produto = new Produto(nome, precoCusto, precoVenda, categoria, quantidade);
 
         Fabrica.prepararConexao();
         Fabrica.abrirConexao();
         ORM orm = new ORMProduto();
-        orm.salvar(produto);
+
+        orm.salvar(ProdutoCli.lerDadodProduto());
 
         return "inserir";
     }

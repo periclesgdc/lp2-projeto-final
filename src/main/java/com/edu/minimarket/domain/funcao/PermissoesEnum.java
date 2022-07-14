@@ -5,7 +5,7 @@ public enum PermissoesEnum {
     CRIAR_CAIXA("Criar caixa"),
     CRIAR_ESTOQUISTA("Criar estoquista"),
     ABRIR_PDV("Abrir PDV"),
-    CONSULTAR_PRODUTOS("Consultar estoque"),
+    CONSULTAR_PRODUTO("Consultar estoque"),
     INSERIR_PRODUTO("Inserir Produto"),
     LISTAR_PRODUTO("Listar Produtos"),
     REMOVER_PRODUTO("Remover do estoque");
