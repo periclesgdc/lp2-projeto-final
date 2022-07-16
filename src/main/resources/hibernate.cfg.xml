@@ -14,6 +14,8 @@
 		<!-- Classes -->
 		<mapping class="com.edu.minimarket.domain.Produto" />
 		<mapping class="com.edu.minimarket.domain.Usuario" />
+		<mapping class="com.edu.minimarket.domain.funcao.Funcao" />
+		<mapping class="com.edu.minimarket.domain.funcao.Gerente" />
 
 	</session-factory>
 </hibernate-configuration>
