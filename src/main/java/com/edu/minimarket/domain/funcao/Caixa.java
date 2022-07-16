@@ -11,16 +11,6 @@ public class Caixa extends Funcao {
         ));
     }
 
-    @Override
-    public String exibirPermissoes() {
-        return null;
-    }
-
-    @Override
-    public void executarAcao(PermissoesEnum permissao) {
-        
-    }
-
     public void abrirPDV() {
 
     }
