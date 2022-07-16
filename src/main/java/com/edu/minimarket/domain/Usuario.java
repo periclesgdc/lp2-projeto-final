@@ -4,11 +4,13 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import com.edu.minimarket.domain.funcao.Funcao;
 
@@ -19,14 +21,14 @@ public class Usuario extends ClasseBase {
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String nome;
 
     @Column(nullable = false)
     private String senha;
 
-    @Column(nullable = false)
-    @Embedded
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "funcao_id")
     private Funcao funcao;
 
     public Usuario() {}
@@ -35,6 +37,10 @@ public class Usuario extends ClasseBase {
         this.nome = nome;
         this.senha = Usuario.encriptarSenha(senha);
         this.funcao = funcao;
+    }
+
+    public String getNome() {
+        return nome;
     }
 
     public Boolean autenticar(String senha) {
