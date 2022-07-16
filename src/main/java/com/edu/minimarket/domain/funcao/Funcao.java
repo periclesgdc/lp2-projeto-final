@@ -1,25 +1,61 @@
 package com.edu.minimarket.domain.funcao;
 
+import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
 
-import java.util.Collection;
+import com.edu.minimarket.domain.Produto;
+import com.edu.minimarket.domain.operations.ProdutoCli;
 
 @Embeddable
 public abstract class Funcao {
-    
+
     @ElementCollection(fetch = FetchType.LAZY)
-    private Collection<PermissoesEnum> permissoes;
+    protected Collection<PermissoesEnum> permissoes;
 
     public Funcao(Collection<PermissoesEnum> permissoes) {
         this.permissoes = permissoes;
     }
 
-    public abstract String exibirPermissoes();
-    public abstract void executarAcao(PermissoesEnum permissao) throws Exception;
-
     public Collection<PermissoesEnum> getPermissoes() {
         return permissoes;
+    }
+
+    public Set<String> exibirPermissoes() {
+        return this.permissoes.stream().map(PermissoesEnum::getDescricao).collect(Collectors.toSet());
+    }
+
+    public Object executarAcao(PermissoesEnum permissao) throws Exception {
+        switch (permissao) {
+            case INSERIR_PRODUTO:
+                this.inserirProduto(ProdutoCli.lerDadoProduto());
+                break;
+            case CONSULTAR_PRODUTO:
+                return this.consultarEstoque(ProdutoCli.consultarProduto());
+            case REMOVER_PRODUTO:
+                this.removerEstoque();
+                break;
+            default:
+                throw new IllegalArgumentException("Permissão inválida para o usuário");
+        }
+
+        return null;
+    }
+
+    private void inserirProduto(Produto produto) {
+        ProdutoCli.salvarProduto(produto);
+    }
+
+    private String consultarEstoque(Long id) {
+        Produto produto = ProdutoCli.buscarProduto(id);
+
+        return produto.detalhes();
+    }
+
+    private void removerEstoque() {
     }
 }
