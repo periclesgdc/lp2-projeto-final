@@ -1,6 +1,7 @@
 package com.edu.minimarket.domain.funcao;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -27,8 +28,8 @@ public abstract class Funcao {
         this.permissoes = permissoes;
     }
 
-    public Collection<PermissoesEnum> getPermissoes() {
-        return permissoes;
+    public List<PermissoesEnum> getPermissoes() {
+        return List.copyOf(this.permissoes);
     }
 
     public Set<String> exibirPermissoes() {
@@ -37,8 +38,13 @@ public abstract class Funcao {
 
     public Object executarAcao(PermissoesEnum permissao) throws Exception {
         switch (permissao) {
-            case INSERIR_PRODUTO:
-                this.inserirProduto(ProdutoCli.lerDadoProduto());
+            case INSERIR_PRODUTO: {
+                ProdutoCli.lerDadoProduto();
+                ProdutoCli.salvarProdutos();
+            }
+                break;
+            case LISTAR_PRODUTOS:
+                ProdutoCli.listarProdutos();
                 break;
             case CONSULTAR_PRODUTO:
                 return this.consultarEstoque(ProdutoCli.consultarProduto());
@@ -50,10 +56,6 @@ public abstract class Funcao {
         }
 
         return null;
-    }
-
-    private void inserirProduto(Produto produto) {
-        ProdutoCli.salvarProduto(produto);
     }
 
     private String consultarEstoque(Long id) {

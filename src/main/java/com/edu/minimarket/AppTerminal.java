@@ -7,8 +7,6 @@ public class AppTerminal {
 
     private static final String DIVISORIA = "----------------------------------------";
 
-    private static Boolean autenticado = false;
-
     public static void iniciarPrograma() throws Exception {
         try {
             Fabrica.prepararConexao();
@@ -18,23 +16,25 @@ public class AppTerminal {
 
             blocoTexto("Minimarket, sistema de automação comercial!");
 
-            while (true) {
-                if (Boolean.FALSE.equals(autenticado)) {
-                    autenticado = UsuarioCli.autenticarUsuario();
-                }
+            UsuarioCli.autenticarUsuario();
 
-                break; // remover depois
+            while (UsuarioCli.usuarioLogado()) {
+                blocoTexto(UsuarioCli.exibirPermissoes());
+                UsuarioCli.solicitarAcao();
             }
         } catch (Exception e) {
             throw e;
         } finally {
+            System.out.println("Até logo!\n\n");
             Fabrica.fecharConexao();
         }
     }
 
-    private static void blocoTexto(String conteudo) {
-        System.out.println(DIVISORIA);
-        System.out.println(conteudo);
+    public static void blocoTexto(String conteudo) {
+        System.out.println(String.format("%s\n%s\n%s", DIVISORIA, conteudo, DIVISORIA));
+    }
+
+    public static void divisoria() {
         System.out.println(DIVISORIA);
     }
 }

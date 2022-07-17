@@ -2,6 +2,12 @@ package com.edu.minimarket.domain.funcao;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Estoquista extends Funcao {
 
     public Estoquista() {
