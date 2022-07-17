@@ -1,17 +1,22 @@
 package com.edu.minimarket.domain.operations;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+import com.edu.minimarket.AppTerminal;
 import com.edu.minimarket.connection.ORMProduto;
 import com.edu.minimarket.domain.Produto;
 import com.edu.minimarket.enums.CategoriaEnum;
 
-import java.util.Arrays;
-import java.util.Scanner;
-
 public class ProdutoCli {
     private static ORMProduto ormProduto = new ORMProduto();
     private static Scanner entrada = new Scanner(System.in);
+    private static List<Produto> produtos = new ArrayList<>();
 
-    public static Produto lerDadoProduto(){
+    public static void lerDadoProduto() {
         System.out.print("Nome do produto: ");
         String nome =  entrada.nextLine();
 
@@ -25,14 +30,14 @@ public class ProdutoCli {
         System.out.println(Arrays.asList(CategoriaEnum.values()));
         CategoriaEnum categoria = CategoriaEnum.valueOf(entrada.next());
 
-        System.out.print("Quantidade inicial de produtos: ");
+        System.out.print("Quantidade inicial: ");
         Integer quantidade = entrada.nextInt();
 
-       return new Produto(nome, precoCusto, precoVenda, categoria, quantidade);
+        produtos.add(new Produto(nome, precoCusto, precoVenda, categoria, quantidade));
     }
 
-    public static void salvarProduto(Produto produto) {
-        ProdutoCli.ormProduto.salvar(produto);
+    public static void salvarProdutos() {
+        ProdutoCli.ormProduto.salvar(produtos);
     }
 
     public static Long consultarProduto(){
@@ -42,5 +47,16 @@ public class ProdutoCli {
 
     public static Produto buscarProduto(Long id) {
         return ProdutoCli.ormProduto.buscarPorId(id);
+    }
+
+    public static void listarProdutos() {
+        String result = "Lista de produtos\n\n";
+
+        List<Produto> produtosSalvos = ProdutoCli.ormProduto.buscarTodos();
+
+        String list = produtosSalvos.stream()
+            .map(prod -> prod.detalhes()).collect(Collectors.joining("\n"));
+        
+        AppTerminal.blocoTexto(result + list);
     }
 }
