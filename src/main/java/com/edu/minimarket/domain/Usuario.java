@@ -43,6 +43,10 @@ public class Usuario extends ClasseBase {
         return nome;
     }
 
+    public Funcao getFuncao() {
+        return funcao;
+    }
+
     public Boolean autenticar(String senha) {
         return Usuario.verificarSenha(senha, this.senha);
     }

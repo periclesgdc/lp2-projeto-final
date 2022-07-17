@@ -7,7 +7,7 @@ public enum PermissoesEnum {
     ABRIR_PDV("Abrir PDV"),
     CONSULTAR_PRODUTO("Consultar estoque"),
     INSERIR_PRODUTO("Inserir Produto"),
-    LISTAR_PRODUTO("Listar Produtos"),
+    LISTAR_PRODUTOS("Listar Produtos"),
     REMOVER_PRODUTO("Remover do estoque");
 
 
