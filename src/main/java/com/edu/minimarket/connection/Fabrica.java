@@ -1,5 +1,11 @@
 package com.edu.minimarket.connection;
 
+/** Classe para conexão com banco de dados do MiniMarket. 
+ * @author Davi Carvalho, Pericles Gomes e Larissa Jales
+ * @version 1.0 
+ * @since Realese 01 da aplicação 
+ */
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;

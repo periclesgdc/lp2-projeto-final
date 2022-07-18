@@ -1,6 +1,6 @@
 package com.edu.minimarket.domain;
 
-/** Classe para objetos tipo Usuário, onde serão contidos os valores do nome, senha e função. 
+/** Classe para objetos tipo Usuário, onde serão contidos os valores do nome, senha e função do MiniMarket. 
  * @author Davi Carvalho, Pericles Gomes e Larissa Jales
  * @version 1.0 
  * @since Realese 01 da aplicação 

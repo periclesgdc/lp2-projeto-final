@@ -1,5 +1,5 @@
 package com.edu.minimarket.domain.funcao;
-/** Enum para tipos de permissões que teremos no nosso minimarket 
+/** Classe Enum para tipos de permissões existentes no MiniMarket. 
  * @author Davi Carvalho, Pericles Gomes e Larissa Jales
  * @version 1.0 
  * @since Realese 01 da aplicação 
