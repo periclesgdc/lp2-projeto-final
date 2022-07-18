@@ -1,5 +1,12 @@
 package com.edu.minimarket.domain.operations;
 
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
 import com.edu.minimarket.AppTerminal;
 import com.edu.minimarket.connection.ORMUsuario;
 import com.edu.minimarket.domain.Usuario;
@@ -7,13 +14,6 @@ import com.edu.minimarket.domain.funcao.Caixa;
 import com.edu.minimarket.domain.funcao.Funcao;
 import com.edu.minimarket.domain.funcao.Gerente;
 import com.edu.minimarket.domain.funcao.PermissoesEnum;
-
-import java.security.NoSuchAlgorithmException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class UsuarioCli {
     private static ORMUsuario ormUsuario = new ORMUsuario();

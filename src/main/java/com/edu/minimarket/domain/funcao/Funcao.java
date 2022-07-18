@@ -1,14 +1,19 @@
 package com.edu.minimarket.domain.funcao;
 
-import com.edu.minimarket.domain.Produto;
-import com.edu.minimarket.domain.operations.ProdutoCli;
-import com.edu.minimarket.domain.operations.UsuarioCli;
-
-import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import com.edu.minimarket.domain.Produto;
+import com.edu.minimarket.domain.operations.ProdutoCli;
+import com.edu.minimarket.domain.operations.UsuarioCli;
 
 @Entity
 public abstract class Funcao {

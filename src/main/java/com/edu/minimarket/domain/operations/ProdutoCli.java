@@ -1,15 +1,15 @@
 package com.edu.minimarket.domain.operations;
 
-import com.edu.minimarket.AppTerminal;
-import com.edu.minimarket.connection.ORMProduto;
-import com.edu.minimarket.domain.Produto;
-import com.edu.minimarket.enums.CategoriaEnum;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+
+import com.edu.minimarket.AppTerminal;
+import com.edu.minimarket.connection.ORMProduto;
+import com.edu.minimarket.domain.Produto;
+import com.edu.minimarket.enums.CategoriaEnum;
 
 public class ProdutoCli {
     private static ORMProduto ormProduto = new ORMProduto();
