@@ -1,5 +1,12 @@
 package com.edu.minimarket.domain;
 
+/** Classe para objetos tipo Produto, onde serão contidos os valores do nome, preço de custo, preço de venda, 
+ * categoria, status e quantidade.
+ * @author Davi Carvalho, Pericles Gomes e Larissa Jales
+ * @version 1.0 
+ * @since Realese 01 da aplicação 
+ */
+
 import com.edu.minimarket.enums.CategoriaEnum;
 
 import javax.persistence.*;
