@@ -1,18 +1,11 @@
 package com.edu.minimarket.domain;
 
+import com.edu.minimarket.domain.funcao.Funcao;
+
+import javax.persistence.*;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-
-import com.edu.minimarket.domain.funcao.Funcao;
 
 @Entity
 public class Usuario extends ClasseBase {
@@ -32,7 +25,6 @@ public class Usuario extends ClasseBase {
     private Funcao funcao;
 
     public Usuario() {}
-    
     public Usuario(String nome, String senha, Funcao funcao) throws NoSuchAlgorithmException {
         this.nome = nome;
         this.senha = Usuario.encriptarSenha(senha);
