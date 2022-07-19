@@ -19,6 +19,7 @@ import javax.persistence.Id;
 
 import com.edu.minimarket.domain.Produto;
 import com.edu.minimarket.domain.operations.ProdutoCli;
+import com.edu.minimarket.enums.PermissoesEnum;
 
 @Entity
 public abstract class Funcao {

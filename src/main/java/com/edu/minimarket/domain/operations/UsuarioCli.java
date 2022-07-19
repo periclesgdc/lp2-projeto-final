@@ -11,7 +11,7 @@ import com.edu.minimarket.AppTerminal;
 import com.edu.minimarket.connection.ORMUsuario;
 import com.edu.minimarket.domain.Usuario;
 import com.edu.minimarket.domain.funcao.Gerente;
-import com.edu.minimarket.domain.funcao.PermissoesEnum;
+import com.edu.minimarket.enums.PermissoesEnum;
 
 public class UsuarioCli {
     private static ORMUsuario ormUsuario = new ORMUsuario();
