@@ -21,9 +21,10 @@ public class ProdutoCli {
     private static List<Produto> produtos = new ArrayList<>();
 
     public static void lerDadoProduto() {
-        entrada = new Scanner(System.in);
+        resetarEntrada();
+
         System.out.print("Nome do produto: ");
-        String nome =  entrada.nextLine();
+        String nome = entrada.nextLine();
         System.out.print("Preço de custo: ");
         double precoCusto = entrada.nextDouble();
 
@@ -33,7 +34,7 @@ public class ProdutoCli {
         System.out.println("Escolha uma das categorias abaxo: ");
         System.out.println(ProdutoCli.exibirCategorias());
         System.out.print("Categoria: ");
-        CategoriaEnum categoria = Arrays.asList(CategoriaEnum.values()).get(entrada.nextInt()-1);
+        CategoriaEnum categoria = Arrays.asList(CategoriaEnum.values()).get(entrada.nextInt() - 1);
 
         System.out.print("Quantidade inicial: ");
         Integer quantidade = entrada.nextInt();
@@ -45,9 +46,20 @@ public class ProdutoCli {
         ProdutoCli.ormProduto.salvar(produtos);
     }
 
-    public static Long consultarProduto(){
+    public static Long consultarProduto() {
+        resetarEntrada();
+
         System.out.print("Digite o id do produto: ");
         return entrada.nextLong();
+    }
+
+    public static void consultarEstoque(Long id) {
+        try {
+            System.out.println(buscarProduto(id).detalhes());
+            aguardarConfirmacao();
+        } catch (Exception e) {
+            System.out.println("O produto buscado não existe!");
+        }
     }
 
     public static Produto buscarProduto(Long id) {
@@ -61,41 +73,45 @@ public class ProdutoCli {
         String result = "Lista de produtos\n\n";
 
         cabecalhos.put("ID", 8);
-        cabecalhos.put("NOME", produtosSalvos.stream().map(Produto::getNome).max(Comparator.comparingInt(String::length)).get().length());
+        cabecalhos.put("NOME", produtosSalvos.stream().map(Produto::getNome)
+                .max(Comparator.comparingInt(String::length)).get().length());
         cabecalhos.put("CUSTO", 10);
         cabecalhos.put("VENDA", 10);
-        cabecalhos.put("CATEGORIA", produtosSalvos.stream().map(Produto::getCategoria).map(CategoriaEnum::name).max(Comparator.comparingInt(String::length)).get().length());
+        cabecalhos.put("CATEGORIA", produtosSalvos.stream().map(Produto::getCategoria).map(CategoriaEnum::name)
+                .max(Comparator.comparingInt(String::length)).get().length());
         cabecalhos.put("QTD", 6);
         cabecalhos.put("ATIVO", 5);
-        
+
         var cabecalhosSet = cabecalhos.entrySet().iterator();
 
-        result += String.format("|%s|\n", cabecalhos.keySet().stream().map(elem -> espacos(elem, cabecalhosSet)).collect(Collectors.joining("|")));
+        result += String.format("|%s|\n", cabecalhos.keySet().stream().map(elem -> espacos(elem, cabecalhosSet))
+                .collect(Collectors.joining("|")));
 
         result += produtosSalvos.stream()
-            .map(elem -> {
-                var cabecalhosSetInternal = cabecalhos.entrySet().iterator();
+                .map(elem -> {
+                    var cabecalhosSetInternal = cabecalhos.entrySet().iterator();
 
-                return String.format("|%s|%s|%s|%s|%s|%s|%s|",
-                    espacos(elem.getId().toString(), cabecalhosSetInternal),
-                    espacos(elem.getNome(), cabecalhosSetInternal),
-                    espacos(elem.getPrecoCusto().toString(), cabecalhosSetInternal),
-                    espacos(elem.getPrecoVenda().toString(), cabecalhosSetInternal),
-                    espacos(elem.getCategoria().name(), cabecalhosSetInternal),
-                    espacos(elem.getQuantidade().toString(), cabecalhosSetInternal),
-                    espacos(elem.getStatus() ? "V" : "F", cabecalhosSetInternal)
-                );
-            })
-            .collect(Collectors.joining("\n"));
+                    return String.format("|%s|%s|%s|%s|%s|%s|%s|",
+                            espacos(elem.getId().toString(), cabecalhosSetInternal),
+                            espacos(elem.getNome(), cabecalhosSetInternal),
+                            espacos(elem.getPrecoCusto().toString(), cabecalhosSetInternal),
+                            espacos(elem.getPrecoVenda().toString(), cabecalhosSetInternal),
+                            espacos(elem.getCategoria().name(), cabecalhosSetInternal),
+                            espacos(elem.getQuantidade().toString(), cabecalhosSetInternal),
+                            espacos(elem.getStatus() ? "V" : "F", cabecalhosSetInternal));
+                })
+                .collect(Collectors.joining("\n"));
 
-        System.out.println(result);;
+        System.out.println(result);
+
+        aguardarConfirmacao();
     }
 
     private static String espacos(String item, Iterator<Entry<String, Integer>> parametros) {
         return String.format(" %s %s", item, " ".repeat(parametros.next().getValue() - item.length() + 1));
     }
 
-    public static String exibirCategorias() {
+    private static String exibirCategorias() {
         List<CategoriaEnum> listed = Arrays.asList(CategoriaEnum.values());
         String menu = listed.stream()
                 .map(elem -> String.format("%s - %s", listed.indexOf(elem) + 1, elem.toString()))
@@ -104,14 +120,20 @@ public class ProdutoCli {
         return menu;
     }
 
+    public static Produto buscarParaAlterarQuantidade(Long id) {
+        resetarEntrada();
+
+        Produto produto = buscarProduto(id);
+
+        System.out.println(String.format("Quantidade atual: %s x%s", produto.getNome(), produto.getQuantidade()));
+        System.out.print("Digite o quantia a ser alterada: ");
+
+        return produto;
+    }
+
     public static void removerProdutos(Long id) {
-        entrada = new Scanner(System.in);
-        
         try {
-            Produto produto = buscarProduto(id);
-    
-            System.out.println(String.format("Quantidade atual: %s x%s", produto.getNome(), produto.getQuantidade()));
-            System.out.print("Digite o quantidade: ");
+            Produto produto = ProdutoCli.buscarParaAlterarQuantidade(id);
             Integer quantidade = entrada.nextInt();
 
             produto.removerUnidades(quantidade);
@@ -120,5 +142,28 @@ public class ProdutoCli {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public static void reabastecerProduto(Long id) {
+        try {
+            Produto produto = ProdutoCli.buscarParaAlterarQuantidade(id);
+            Integer quantidade = entrada.nextInt();
+
+            produto.adicionarUnidades(quantidade);
+
+            ProdutoCli.ormProduto.salvar(produto);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void aguardarConfirmacao() {
+        resetarEntrada();
+        System.out.print("\n\nENTER ");
+        entrada.nextLine();
+    }
+
+    private static void resetarEntrada() {
+        entrada = new Scanner(System.in);
     }
 }

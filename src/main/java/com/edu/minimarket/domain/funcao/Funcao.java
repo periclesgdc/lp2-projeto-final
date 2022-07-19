@@ -17,7 +17,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import com.edu.minimarket.domain.Produto;
 import com.edu.minimarket.domain.operations.ProdutoCli;
 import com.edu.minimarket.domain.operations.UsuarioCli;
 import com.edu.minimarket.enums.PermissoesEnum;
@@ -44,20 +43,24 @@ public abstract class Funcao {
         return this.permissoes.stream().map(PermissoesEnum::getDescricao).collect(Collectors.toSet());
     }
 
-    public Object executarAcao(PermissoesEnum permissao) throws Exception {
+    public void executarAcao(PermissoesEnum permissao) throws Exception {
         switch (permissao) {
             case INSERIR_PRODUTO: {
                 ProdutoCli.lerDadoProduto();
                 ProdutoCli.salvarProdutos();
             }
                 break;
+            case REABASTECER_PRODUTO:
+                ProdutoCli.reabastecerProduto(ProdutoCli.consultarProduto());
+                break;
             case LISTAR_PRODUTOS:
                 ProdutoCli.listarProdutos();
                 break;
             case CONSULTAR_PRODUTO:
-                return this.consultarEstoque(ProdutoCli.consultarProduto());
+                ProdutoCli.consultarEstoque(ProdutoCli.consultarProduto());
+                break;
             case REMOVER_PRODUTO:
-                this.removerEstoque(ProdutoCli.consultarProduto());
+                ProdutoCli.removerProdutos(ProdutoCli.consultarProduto());
                 break;
             case CRIAR_GERENTE:
                 UsuarioCli.criarGerente();
@@ -65,17 +68,5 @@ public abstract class Funcao {
             default:
                 throw new IllegalArgumentException("Permissão inválida para o usuário");
         }
-
-        return null;
-    }
-
-    private String consultarEstoque(Long id) {
-        Produto produto = ProdutoCli.buscarProduto(id);
-
-        return produto.detalhes();
-    }
-
-    private void removerEstoque(Long id) {
-        ProdutoCli.removerProdutos(id);
     }
 }
