@@ -1,6 +1,6 @@
 ### Projeto Final IMD0040 - III Unidade
 #### Participantes: Davi Carvalho, Larissa Jales e Péricles Gomes
-#### O propósito do MiniMarket é a criação de um sistema de automação de PDV (Ponto de Venda) de estoque de produtos. 
+#### O propósito do MiniMarket é a criação de um sistema de automação de estoque de produtos. 
 ##### O projeto foi dividido nos pacotes: 
 - *Connection*: onde estará as classes de conexão com o banco de dados, tanto classes genéricas do hibernate como do projeto;  
 - *Domain*: onde estará as classes específicas de domínio, tais como as classes de entidades e interação com usuário; 
@@ -14,4 +14,4 @@ Para construí-lo, usamos o comando *install* para instalar as dependências e *
 
 
 #### Diagrama do projeto (MiniMarket) 
-![diagrama-do-projeto](https://github.com/periclesgdc/lp2-projeto-final/blob/main/Trabalho%20Final%20LP2.drawio.png?raw=true)
+![diagrama-do-projeto](https://github.com/periclesgdc/lp2-projeto-final/blob/main/uml.drawio.png?raw=true)
