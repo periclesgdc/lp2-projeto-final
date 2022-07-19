@@ -10,10 +10,9 @@ import java.util.stream.Collectors;
 import com.edu.minimarket.AppTerminal;
 import com.edu.minimarket.connection.ORMUsuario;
 import com.edu.minimarket.domain.Usuario;
-import com.edu.minimarket.domain.funcao.Caixa;
 import com.edu.minimarket.domain.funcao.Funcao;
 import com.edu.minimarket.domain.funcao.Gerente;
-import com.edu.minimarket.domain.funcao.PermissoesEnum;
+import com.edu.minimarket.enums.PermissoesEnum;
 
 public class UsuarioCli {
     private static ORMUsuario ormUsuario = new ORMUsuario();
@@ -90,9 +89,6 @@ public class UsuarioCli {
         UsuarioCli.criarUsuario(new Gerente());
     }
 
-    public static void criarCaixa() {
-        UsuarioCli.criarUsuario(new Caixa());
-    }
     public static void criarUsuario(Funcao funcao){
         System.out.print("Usuário: ");
         String nome = entrada.next();

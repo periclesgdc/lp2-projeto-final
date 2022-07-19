@@ -1,5 +1,11 @@
 package com.edu.minimarket.domain.funcao;
 
+/** Classe de entidade base para os tipos de funções do MiniMarket. 
+ * @author Davi Carvalho, Pericles Gomes e Larissa Jales
+ * @version 1.0 
+ * @since Realese 01 da aplicação 
+ */
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -14,6 +20,7 @@ import javax.persistence.Id;
 import com.edu.minimarket.domain.Produto;
 import com.edu.minimarket.domain.operations.ProdutoCli;
 import com.edu.minimarket.domain.operations.UsuarioCli;
+import com.edu.minimarket.enums.PermissoesEnum;
 
 @Entity
 public abstract class Funcao {
@@ -54,9 +61,6 @@ public abstract class Funcao {
                 break;
             case CRIAR_GERENTE:
                 UsuarioCli.criarGerente();
-                break;
-            case CRIAR_CAIXA:
-                UsuarioCli.criarCaixa();
                 break;
             default:
                 throw new IllegalArgumentException("Permissão inválida para o usuário");
