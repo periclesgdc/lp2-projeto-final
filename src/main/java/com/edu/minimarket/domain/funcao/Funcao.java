@@ -1,5 +1,11 @@
 package com.edu.minimarket.domain.funcao;
 
+/** Classe de entidade base para os tipos de funções do MiniMarket. 
+ * @author Davi Carvalho, Pericles Gomes e Larissa Jales
+ * @version 1.0 
+ * @since Realese 01 da aplicação 
+ */
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
