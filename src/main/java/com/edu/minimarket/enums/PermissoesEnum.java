@@ -6,10 +6,11 @@ package com.edu.minimarket.enums;
  * @since Realese 01 da aplicação 
  */
 public enum PermissoesEnum {
-    CRIAR_GERENTE("Criar gerente"),
-    CRIAR_ESTOQUISTA("Criar estoquista"),
-    CONSULTAR_PRODUTO("Consultar estoque"),
+    CRIAR_GERENTE("Criar Gerente"),
+    CRIAR_ESTOQUISTA("Criar Estoquista"),
+    CONSULTAR_PRODUTO("Consultar Produto"),
     INSERIR_PRODUTO("Inserir Produto"),
+    REABASTECER_PRODUTO("Reabastecer Produto"),
     LISTAR_PRODUTOS("Listar Produtos"),
     REMOVER_PRODUTO("Remover Produto");
 

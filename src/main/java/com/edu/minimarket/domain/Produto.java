@@ -40,11 +40,15 @@ public class Produto extends ClasseBase {
     public Produto() {}
 
     public Produto(String nome, Double precoCusto, Double precoVenda, CategoriaEnum categoria, Integer quantidade) {
-        this.nome = nome;
+        this.nome = nome.toUpperCase();
         this.precoCusto = precoCusto;
         this.precoVenda = precoVenda;
         this.categoria = categoria;
         this.quantidade = quantidade;
+    }
+
+    public Long getId() {
+        return this.id;
     }
 
     public String getNome() {
@@ -91,19 +95,32 @@ public class Produto extends ClasseBase {
         return quantidade;
     }
 
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
+    public void adicionarUnidades(Integer quantidade) {
+        if (quantidade > 0) {
+            this.quantidade += quantidade;
+        } else {
+            throw new IllegalArgumentException("Não é possível informar uma quantidade negativa.");
+        }
+    }
+
+    public void removerUnidades(Integer quantidade) {
+        if (quantidade > 0 && ((this.quantidade - quantidade) >= 0)) {
+            this.quantidade -= quantidade;
+        } else {
+            throw new IllegalArgumentException("Não é possível informar uma quanidade negativa ou maior que o atual estoque.");
+        }
     }
 
     @Override
     public String detalhes() {
         return String.format(
-            "Produto{id = %s, nome = %s, custo = %s, venda = %s, categoria = %s, status = %s}",
+            "Produto{id = %s, nome = %s, custo = %s, venda = %s, categoria = %s, quantidade = %s, status = %s}",
             this.id,
             this.nome,
             this.precoCusto,
             this.precoVenda,
             this.categoria.name(),
+            this.quantidade,
             this.status
         );
     }

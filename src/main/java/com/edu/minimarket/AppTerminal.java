@@ -1,5 +1,7 @@
 package com.edu.minimarket;
 
+import java.io.IOException;
+
 import com.edu.minimarket.connection.Fabrica;
 import com.edu.minimarket.domain.operations.UsuarioCli;
 
@@ -14,6 +16,7 @@ public class AppTerminal {
 
             UsuarioCli.criarUsuarioAdmin();
 
+            limparConsole();
             blocoTexto("Minimarket, sistema de automação comercial!");
 
             UsuarioCli.autenticarUsuario();
@@ -21,6 +24,7 @@ public class AppTerminal {
             while (UsuarioCli.usuarioLogado()) {
                 blocoTexto(UsuarioCli.exibirPermissoes());
                 UsuarioCli.solicitarAcao();
+                limparConsole();
             }
         } catch (Exception e) {
             throw e;
@@ -36,5 +40,15 @@ public class AppTerminal {
 
     public static void divisoria() {
         System.out.println(DIVISORIA);
+    }
+
+    public static void limparConsole() throws IOException {
+        final String os = System.getProperty("os.name");
+        
+        if (os.contains("Windows")) {
+            Runtime.getRuntime().exec("cls");
+        } else {
+            Runtime.getRuntime().exec("clear");
+        }
     }
 }
