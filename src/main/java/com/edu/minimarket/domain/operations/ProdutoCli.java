@@ -2,11 +2,15 @@ package com.edu.minimarket.domain.operations;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import com.edu.minimarket.AppTerminal;
 import com.edu.minimarket.connection.ORMProduto;
 import com.edu.minimarket.domain.Produto;
 import com.edu.minimarket.enums.CategoriaEnum;
@@ -42,7 +46,7 @@ public class ProdutoCli {
     }
 
     public static Long consultarProduto(){
-        System.out.print("Digite o id do produto a ser pesquisado: ");
+        System.out.print("Digite o id do produto: ");
         return entrada.nextLong();
     }
 
@@ -51,14 +55,44 @@ public class ProdutoCli {
     }
 
     public static void listarProdutos() {
+        List<Produto> produtosSalvos = ProdutoCli.ormProduto.buscarTodos();
+        Map<String, Integer> cabecalhos = new LinkedHashMap<>();
+
         String result = "Lista de produtos\n\n";
 
-        List<Produto> produtosSalvos = ProdutoCli.ormProduto.buscarTodos();
+        cabecalhos.put("ID", 8);
+        cabecalhos.put("NOME", produtosSalvos.stream().map(Produto::getNome).max(Comparator.comparingInt(String::length)).get().length());
+        cabecalhos.put("CUSTO", 10);
+        cabecalhos.put("VENDA", 10);
+        cabecalhos.put("CATEGORIA", produtosSalvos.stream().map(Produto::getCategoria).map(CategoriaEnum::name).max(Comparator.comparingInt(String::length)).get().length());
+        cabecalhos.put("QTD", 6);
+        cabecalhos.put("ATIVO", 5);
+        
+        var cabecalhosSet = cabecalhos.entrySet().iterator();
 
-        String list = produtosSalvos.stream()
-                .map(prod -> prod.detalhes()).collect(Collectors.joining("\n"));
+        result += String.format("|%s|\n", cabecalhos.keySet().stream().map(elem -> espacos(elem, cabecalhosSet)).collect(Collectors.joining("|")));
 
-        AppTerminal.blocoTexto(result + list);
+        result += produtosSalvos.stream()
+            .map(elem -> {
+                var cabecalhosSetInternal = cabecalhos.entrySet().iterator();
+
+                return String.format("|%s|%s|%s|%s|%s|%s|%s|",
+                    espacos(elem.getId().toString(), cabecalhosSetInternal),
+                    espacos(elem.getNome(), cabecalhosSetInternal),
+                    espacos(elem.getPrecoCusto().toString(), cabecalhosSetInternal),
+                    espacos(elem.getPrecoVenda().toString(), cabecalhosSetInternal),
+                    espacos(elem.getCategoria().name(), cabecalhosSetInternal),
+                    espacos(elem.getQuantidade().toString(), cabecalhosSetInternal),
+                    espacos(elem.getStatus() ? "V" : "F", cabecalhosSetInternal)
+                );
+            })
+            .collect(Collectors.joining("\n"));
+
+        System.out.println(result);;
+    }
+
+    private static String espacos(String item, Iterator<Entry<String, Integer>> parametros) {
+        return String.format(" %s %s", item, " ".repeat(parametros.next().getValue() - item.length() + 1));
     }
 
     public static String exibirCategorias() {
@@ -68,5 +102,23 @@ public class ProdutoCli {
                 .collect(Collectors.joining("\n"));
 
         return menu;
+    }
+
+    public static void removerProdutos(Long id) {
+        entrada = new Scanner(System.in);
+        
+        try {
+            Produto produto = buscarProduto(id);
+    
+            System.out.println(String.format("Quantidade atual: %s x%s", produto.getNome(), produto.getQuantidade()));
+            System.out.print("Digite o quantidade: ");
+            Integer quantidade = entrada.nextInt();
+
+            produto.removerUnidades(quantidade);
+
+            ProdutoCli.ormProduto.salvar(produto);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

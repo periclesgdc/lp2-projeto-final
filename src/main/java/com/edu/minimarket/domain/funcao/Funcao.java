@@ -57,7 +57,7 @@ public abstract class Funcao {
             case CONSULTAR_PRODUTO:
                 return this.consultarEstoque(ProdutoCli.consultarProduto());
             case REMOVER_PRODUTO:
-                this.removerEstoque();
+                this.removerEstoque(ProdutoCli.consultarProduto());
                 break;
             case CRIAR_GERENTE:
                 UsuarioCli.criarGerente();
@@ -75,6 +75,7 @@ public abstract class Funcao {
         return produto.detalhes();
     }
 
-    private void removerEstoque() {
+    private void removerEstoque(Long id) {
+        ProdutoCli.removerProdutos(id);
     }
 }

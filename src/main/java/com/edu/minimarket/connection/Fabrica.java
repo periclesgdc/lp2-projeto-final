@@ -116,4 +116,8 @@ public class Fabrica {
 
         return result;
     }
+
+    public static <T extends ClasseBase> void remover(T entidade) {
+        session.delete(entidade);
+    }
 }
