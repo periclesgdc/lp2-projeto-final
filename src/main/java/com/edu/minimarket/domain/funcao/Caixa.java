@@ -1,5 +1,11 @@
 package com.edu.minimarket.domain.funcao;
 
+/** Classe com os métodos da permissão de Caixa do MiniMarket. 
+ * @author Davi Carvalho, Pericles Gomes e Larissa Jales
+ * @version 1.0 
+ * @since Realese 01 da aplicação 
+ */
+
 import java.util.List;
 
 import javax.persistence.Entity;
