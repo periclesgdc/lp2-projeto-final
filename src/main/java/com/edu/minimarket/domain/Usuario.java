@@ -37,7 +37,6 @@ public class Usuario extends ClasseBase {
     private Funcao funcao;
 
     public Usuario() {}
-    
     public Usuario(String nome, String senha, Funcao funcao) throws NoSuchAlgorithmException {
         this.nome = nome;
         this.senha = Usuario.encriptarSenha(senha);

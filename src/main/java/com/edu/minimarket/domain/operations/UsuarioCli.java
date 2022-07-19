@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import com.edu.minimarket.AppTerminal;
 import com.edu.minimarket.connection.ORMUsuario;
 import com.edu.minimarket.domain.Usuario;
+import com.edu.minimarket.domain.funcao.Funcao;
 import com.edu.minimarket.domain.funcao.Gerente;
 import com.edu.minimarket.enums.PermissoesEnum;
 
@@ -81,6 +82,25 @@ public class UsuarioCli {
             }
         } else {
             usuarioLogado = null;
+        }
+    }
+
+    public static void criarGerente() {
+        UsuarioCli.criarUsuario(new Gerente());
+    }
+
+    public static void criarUsuario(Funcao funcao){
+        System.out.print("Usuário: ");
+        String nome = entrada.next();
+
+        System.out.print("Senha: ");
+        String senha = entrada.next();
+        System.out.println(nome);
+        System.out.println(senha);
+        try {
+            UsuarioCli.ormUsuario.salvar(new Usuario(nome, senha, funcao));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

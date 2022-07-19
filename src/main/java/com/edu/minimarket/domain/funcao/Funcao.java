@@ -19,6 +19,7 @@ import javax.persistence.Id;
 
 import com.edu.minimarket.domain.Produto;
 import com.edu.minimarket.domain.operations.ProdutoCli;
+import com.edu.minimarket.domain.operations.UsuarioCli;
 import com.edu.minimarket.enums.PermissoesEnum;
 
 @Entity
@@ -57,6 +58,9 @@ public abstract class Funcao {
                 return this.consultarEstoque(ProdutoCli.consultarProduto());
             case REMOVER_PRODUTO:
                 this.removerEstoque();
+                break;
+            case CRIAR_GERENTE:
+                UsuarioCli.criarGerente();
                 break;
             default:
                 throw new IllegalArgumentException("Permissão inválida para o usuário");

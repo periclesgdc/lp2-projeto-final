@@ -17,9 +17,9 @@ public class ProdutoCli {
     private static List<Produto> produtos = new ArrayList<>();
 
     public static void lerDadoProduto() {
+        entrada = new Scanner(System.in);
         System.out.print("Nome do produto: ");
         String nome =  entrada.nextLine();
-
         System.out.print("Preço de custo: ");
         double precoCusto = entrada.nextDouble();
 
@@ -27,8 +27,9 @@ public class ProdutoCli {
         double precoVenda = entrada.nextDouble();
 
         System.out.println("Escolha uma das categorias abaxo: ");
-        System.out.println(Arrays.asList(CategoriaEnum.values()));
-        CategoriaEnum categoria = CategoriaEnum.valueOf(entrada.next());
+        System.out.println(ProdutoCli.exibirCategorias());
+        System.out.print("Categoria: ");
+        CategoriaEnum categoria = Arrays.asList(CategoriaEnum.values()).get(entrada.nextInt()-1);
 
         System.out.print("Quantidade inicial: ");
         Integer quantidade = entrada.nextInt();
@@ -55,8 +56,17 @@ public class ProdutoCli {
         List<Produto> produtosSalvos = ProdutoCli.ormProduto.buscarTodos();
 
         String list = produtosSalvos.stream()
-            .map(prod -> prod.detalhes()).collect(Collectors.joining("\n"));
-        
+                .map(prod -> prod.detalhes()).collect(Collectors.joining("\n"));
+
         AppTerminal.blocoTexto(result + list);
+    }
+
+    public static String exibirCategorias() {
+        List<CategoriaEnum> listed = Arrays.asList(CategoriaEnum.values());
+        String menu = listed.stream()
+                .map(elem -> String.format("%s - %s", listed.indexOf(elem) + 1, elem.toString()))
+                .collect(Collectors.joining("\n"));
+
+        return menu;
     }
 }
