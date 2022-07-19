@@ -14,4 +14,4 @@ Para construí-lo, usamos o comando *install* para instalar as dependências e *
 
 
 #### Diagrama do projeto (MiniMarket) 
-![diagrama-do-projeto](https://raw.githubusercontent.com/periclesgdc/lp2-projeto-final/main/diagrama.png)
+![diagrama-do-projeto](https://github.com/periclesgdc/lp2-projeto-final/blob/main/diagrama.png)
