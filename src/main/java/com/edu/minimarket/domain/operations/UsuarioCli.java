@@ -1,18 +1,19 @@
 package com.edu.minimarket.domain.operations;
 
+import com.edu.minimarket.AppTerminal;
+import com.edu.minimarket.connection.ORMUsuario;
+import com.edu.minimarket.domain.Usuario;
+import com.edu.minimarket.domain.funcao.Estoquista;
+import com.edu.minimarket.domain.funcao.Funcao;
+import com.edu.minimarket.domain.funcao.Gerente;
+import com.edu.minimarket.enums.PermissoesEnum;
+
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-
-import com.edu.minimarket.AppTerminal;
-import com.edu.minimarket.connection.ORMUsuario;
-import com.edu.minimarket.domain.Usuario;
-import com.edu.minimarket.domain.funcao.Funcao;
-import com.edu.minimarket.domain.funcao.Gerente;
-import com.edu.minimarket.enums.PermissoesEnum;
 
 public class UsuarioCli {
     private static ORMUsuario ormUsuario = new ORMUsuario();
@@ -69,6 +70,7 @@ public class UsuarioCli {
         return menu;
     }
 
+
     public static void solicitarAcao() {
         System.out.print("Ação: ");
         Integer opcao = entrada.nextInt();
@@ -85,10 +87,14 @@ public class UsuarioCli {
         }
     }
 
+
     public static void criarGerente() {
         UsuarioCli.criarUsuario(new Gerente());
     }
 
+    public static void criarEstoquista() {
+        UsuarioCli.criarUsuario(new Estoquista());
+    }
     public static void criarUsuario(Funcao funcao){
         System.out.print("Usuário: ");
         String nome = entrada.next();
@@ -103,4 +109,5 @@ public class UsuarioCli {
             e.printStackTrace();
         }
     }
+
 }

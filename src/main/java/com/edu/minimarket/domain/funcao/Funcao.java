@@ -6,20 +6,15 @@ package com.edu.minimarket.domain.funcao;
  * @since Realese 01 da aplicação 
  */
 
+import com.edu.minimarket.domain.operations.ProdutoCli;
+import com.edu.minimarket.domain.operations.UsuarioCli;
+import com.edu.minimarket.enums.PermissoesEnum;
+
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-import com.edu.minimarket.domain.operations.ProdutoCli;
-import com.edu.minimarket.domain.operations.UsuarioCli;
-import com.edu.minimarket.enums.PermissoesEnum;
 
 @Entity
 public abstract class Funcao {
@@ -64,6 +59,9 @@ public abstract class Funcao {
                 break;
             case CRIAR_GERENTE:
                 UsuarioCli.criarGerente();
+                break;
+            case CRIAR_ESTOQUISTA:
+                UsuarioCli.criarEstoquista();
                 break;
             default:
                 throw new IllegalArgumentException("Permissão inválida para o usuário");
