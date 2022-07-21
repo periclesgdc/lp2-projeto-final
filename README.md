@@ -17,7 +17,7 @@ Em ambiente de desenvolvimento pode-se executar a função *Main* presente na cl
 Para executar o arquivo *.jar* gerado no item anterior basta, em linha de comando, efetuar a entrada `java -jar caminho-programa/nome-programa.jar`.
 
 #### Segue abaixo o link com um vídeo de demonstração
-![Abrir vídeo](https://youtu.be/8Ya-ODezW6k)
+[Abrir vídeo](https://youtu.be/8Ya-ODezW6k)
 
 #### Diagrama do projeto (MiniMarket) 
 ![diagrama-do-projeto](https://github.com/periclesgdc/lp2-projeto-final/blob/main/diagrama.png)
