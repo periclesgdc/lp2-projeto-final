@@ -1,7 +1,7 @@
 ### Projeto Final IMD0040 - III Unidade
 #### Participantes: Davi Carvalho, Larissa Jales e Péricles Gomes
 #### O propósito do MiniMarket é a criação de um sistema de automação de estoque de produtos. 
-##### O projeto foi dividido nos pacotes: 
+##### O projeto foi dividido nos seguintes pacotes: 
 - *Connection*: onde estará as classes de conexão com o banco de dados, tanto classes genéricas do hibernate como do projeto;  
 - *Domain*: onde estará as classes específicas de domínio, tais como as classes de entidades e interação com usuário; 
 - *Enum*: onde estará as classes enum. 
