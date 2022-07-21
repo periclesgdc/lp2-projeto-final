@@ -1,6 +1,7 @@
 package com.edu.minimarket;
 
 import java.io.IOException;
+import java.util.logging.Level;
 
 import com.edu.minimarket.connection.Fabrica;
 import com.edu.minimarket.domain.operations.UsuarioCli;
@@ -11,6 +12,8 @@ public class AppTerminal {
 
     public static void iniciarPrograma() throws Exception {
         try {
+            java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
+            
             Fabrica.prepararConexao();
             Fabrica.abrirConexao();
 
